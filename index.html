@@ -7,13 +7,88 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <title>Boolzapp</title>
 </head>
 <body>
     
+    <div id="app">
 
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        
+        <div class="container">
+            <div class="sidebar">
+                <div class="personal-profile">
+                    <div class="profile-img">
+                        <img src="img/avatar_io.jpg" alt="">
+                        <h5>Davide Lunetta</h5>
+                    </div>
+                    <div class="utilities">
+                        <i class="fas fa-circle-notch"></i>
+                        <i class="fas fa-comment-alt"></i>
+                        <i class="fas fa-ellipsis-v"></i>
+                    </div>
+                </div>
+                <div class="notification">
+                    <div class="inner-text">
+                        <div class="bell"><i class="fas fa-bell-slash"></i></div>
+                        <div class="text">Ricevi nuove notifiche di messaggi <span>Attiva notifiche desktop</span></div>
+                    </div>
+                </div>
+                <div class="inner-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" name="" id="" placeholder="Cerca o inizia una nuova chat" v-model="search" >
+                </div>
+                <div v-for="(person, i) in contacts" class="container-contact" @click="click(i)">
+                    <div class="images" v-if="person.name.toLowerCase().includes(search)">
+                        <img :src="person.avatar" alt=""><span></span>
+                    </div>
+                </div>
+            </div>
+            <main>
+                <div class="nav-main">
+                    <div class="personal-profile">
+                        <div class="profile-img">
+                            <img :src="contacts[currentIndex].avatar" alt="">
+                            
+                            <div class="nav-propic-text">
+                                <h5></h5>
+                                <span class="gray">Ultimo accesso oggi alle:</span>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="utilities">
+                            <i class="fas fa-search"></i>
+                            <i class="fas fa-paperclip"></i>
+                            <i class="fas fa-ellipsis-v"></i>
+                        </div>
+                    </div>
+                    <div class="overflow">
+                        <div class="container-message" v-for="(testo, k) in contacts[currentIndex].messages" :class="mex2(testo.status)">
+                            <div :class="mex(testo.status)">
+                                
+                                <div class="date">
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <footer>
+                            <div class="left">
+                                <i class="far fa-smile"></i>
+                            </div>
+                            <input type="text" name="" id="" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="addMessage">
+                            <div class="right">
+                                <i class="fas fa-microphone"></i>
+                            </div>
+                        </footer>   
+                    </div>
+                </div> 
+            </main>
+        </div>
+    </div>
+
+    
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
     <script src="js/script.js"></script>
 </body>
 </html>
