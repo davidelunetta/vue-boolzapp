@@ -7,14 +7,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.4/dayjs.min.js"></script>
     <title>Boolzapp</title>
 </head>
 <body>
     
     <div id="app">
-
-        
         <div class="container">
             <div class="sidebar">
                 <div class="personal-profile">
@@ -40,7 +38,10 @@
                 </div>
                 <div v-for="(person, i) in contacts" class="container-contact" @click="click(i)">
                     <div class="images" v-if="person.name.toLowerCase().includes(search)">
-                        <img :src="person.avatar" alt=""><span></span>
+                        <h5>{{ person.name }}</h5>
+
+                        <img :src="person.avatar" alt="avatar"><span>{{person.messages[0].message}}</span>
+                        
                     </div>
                 </div>
             </div>
@@ -48,10 +49,11 @@
                 <div class="nav-main">
                     <div class="personal-profile">
                         <div class="profile-img">
-                            <img :src="contacts[currentIndex].avatar" alt="">
+                            <img :src="contacts[currentIndex].avatar" alt="avatar">
                             
+
                             <div class="nav-propic-text">
-                                <h5></h5>
+                                <h5>{{ contacts[currentIndex].name }}</h5>
                                 <span class="gray">Ultimo accesso oggi alle:</span>
                             </div>
                             
@@ -64,11 +66,11 @@
                         </div>
                     </div>
                     <div class="overflow">
-                        <div class="container-message" v-for="(testo, k) in contacts[currentIndex].messages" :class="mex2(testo.status)">
-                            <div :class="mex(testo.status)">
-                                
+                        <div class="container-message" v-for="(messages, k) in contacts[currentIndex].messages" :class="mex2(messages.status)">
+                            <div :class="mex(messages.status)">
+                                {{messages.message}}
                                 <div class="date">
-                                    <span></span>
+                                    <span>{{messages.date}}</span>
                                 </div>
                             </div>
                         </div>
@@ -87,8 +89,8 @@
         </div>
     </div>
 
-    
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
